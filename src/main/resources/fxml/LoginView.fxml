@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ipam.controller.LoginController"
+            styleClass="login-root">
+    <center>
+        <VBox spacing="16" alignment="CENTER" styleClass="login-card" maxWidth="420">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <!-- Logo circle -->
+            <StackPane styleClass="logo-circle">
+                <FontIcon iconLiteral="fas-network-wired" styleClass="logo-icon"/>
+            </StackPane>
+
+            <!-- Title and subtitle -->
+            <Label text="IPAM SRT3" styleClass="login-title" />
+            <Label text="Accédez à votre compte en toute sécurité" styleClass="login-subtitle" />
+
+            <!-- Form fields -->
+            <GridPane hgap="10" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="24" prefWidth="24" />
+                    <ColumnConstraints prefWidth="300" hgrow="ALWAYS" />
+                </columnConstraints>
+                <!-- Login/Email row -->
+                <FontIcon iconLiteral="fas-user" styleClass="input-icon" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="usernameField" promptText="Email ou identifiant" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <!-- Password row with toggle visibility -->
+                <FontIcon iconLiteral="fas-lock" styleClass="input-icon" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <PasswordField fx:id="passwordField" promptText="Mot de passe" />
+                    <TextField fx:id="passwordVisibleField" promptText="Mot de passe" visible="false" managed="false" />
+                </StackPane>
+            </GridPane>
+
+            <!-- Options row: remember + reset -->
+            <HBox spacing="10" alignment="CENTER_LEFT" maxWidth="300">
+                <CheckBox fx:id="showPasswordCheck" text="Afficher le mot de passe" onAction="#togglePasswordVisibility" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <Hyperlink text="Réinitialiser le mot de passe" styleClass="soft-link" />
+            </HBox>
+
+            <!-- Sign in button -->
+            <Button fx:id="loginButton" text="Se connecter" styleClass="primary-button" onAction="#handleLogin" maxWidth="300" />
+            <Label fx:id="messageLabel" styleClass="login-message" />
+
+            <!-- Secure note -->
+            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="secure-note" maxWidth="300">
+                <FontIcon iconLiteral="fas-shield-alt" styleClass="secure-icon"/>
+                <Label text="Votre connexion est sécurisée avec chiffrement 256-bit SSL" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

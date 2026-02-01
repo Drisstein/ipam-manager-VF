@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ipam.controller.AuditLogController">
+    
+    <top>
+        <VBox spacing="10">
+            <HBox styleClass="header" spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Historique d'Audit" styleClass="header-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Actualiser" onAction="#handleRefresh" styleClass="primary-button"/>
+            </HBox>
+            
+            <!-- Filtres et recherche -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="5" right="15" bottom="5" left="15"/>
+                </padding>
+                <Label text="Action:"/>
+                <ComboBox fx:id="actionFilterComboBox" onAction="#handleFilter" prefWidth="120"/>
+                <Label text="Type:"/>
+                <ComboBox fx:id="entityFilterComboBox" onAction="#handleFilter" prefWidth="120"/>
+                <Label text="Limite:"/>
+                <ComboBox fx:id="limitComboBox" onAction="#handleFilter" prefWidth="100"/>
+                <TextField fx:id="searchField" promptText="Rechercher..." HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch" styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="15" bottom="10" left="15"/>
+            </padding>
+            
+            <Label text="Journal des Opérations" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+            
+            <TableView fx:id="auditTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="timestampColumn" text="Date/Heure" prefWidth="150"/>
+                    <TableColumn fx:id="actionColumn" text="Action" prefWidth="100"/>
+                    <TableColumn fx:id="entityTypeColumn" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="entityIdColumn" text="ID" prefWidth="70"/>
+                    <TableColumn fx:id="detailsColumn" text="Détails" prefWidth="400"/>
+                    <TableColumn fx:id="usernameColumn" text="Utilisateur" prefWidth="120"/>
+                </columns>
+            </TableView>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="exportPdfButton" text="Exporter PDF" onAction="#handleExportPdf" styleClass="secondary-button"/>
+                <Button fx:id="exportExcelButton" text="Exporter Excel" onAction="#handleExportExcel" styleClass="secondary-button"/>
+            </HBox>
+            
+            <!-- Légende -->
+            <VBox spacing="5" styleClass="info-panel">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <Label text="Légende des Actions" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <HBox spacing="20">
+                    <Label text="● CREATE" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;"/>
+                    <Label text="● UPDATE" style="-fx-text-fill: #3498db; -fx-font-weight: bold;"/>
+                    <Label text="● DELETE" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                    <Label text="● ASSIGN/RESERVE" style="-fx-text-fill: #f39c12; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

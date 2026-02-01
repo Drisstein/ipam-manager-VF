@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ipam.controller.SubnetController">
+    
+    <top>
+        <VBox spacing="10">
+            <HBox styleClass="header" spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Gestion des Sous-réseaux" styleClass="header-title"/>
+            </HBox>
+            
+            <!-- Barre de recherche -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="5" right="15" bottom="5" left="15"/>
+                </padding>
+                <TextField fx:id="searchField" promptText="Rechercher..." HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch" styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+            <!-- Table des sous-réseaux -->
+            <VBox spacing="5">
+                <padding>
+                    <Insets top="10" right="15" bottom="5" left="15"/>
+                </padding>
+                <Label text="Liste des Sous-réseaux" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Label>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button fx:id="exportPdfButton" text="Exporter PDF" onAction="#handleExportPdf" styleClass="secondary-button"/>
+                    <Button fx:id="exportExcelButton" text="Exporter Excel" onAction="#handleExportExcel" styleClass="secondary-button"/>
+                </HBox>
+                <TableView fx:id="subnetTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="networkColumn" text="Réseau" prefWidth="150"/>
+                        <TableColumn fx:id="cidrColumn" text="CIDR" prefWidth="60"/>
+                        <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="200"/>
+                        <TableColumn fx:id="gatewayColumn" text="Passerelle" prefWidth="120"/>
+                        <TableColumn fx:id="totalHostsColumn" text="Total IPs" prefWidth="80"/>
+                        <TableColumn fx:id="usedHostsColumn" text="Utilisées" prefWidth="80"/>
+                        <TableColumn fx:id="usageColumn" text="Utilisation" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Formulaire -->
+            <ScrollPane fitToWidth="true">
+                <VBox spacing="15" styleClass="form-panel">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    
+                    <Label text="Formulaire de Sous-réseau" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="10" vgap="10">
+                        <!-- Adresse réseau -->
+                        <Label text="Adresse Réseau:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="networkAddressField" promptText="192.168.1.0" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
+                        
+                        <!-- CIDR -->
+                        <Label text="CIDR:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <ComboBox fx:id="cidrComboBox" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="100"/>
+                        
+                        <!-- Description -->
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="descriptionField" promptText="Ex: Réseau bureaux" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"/>
+                        
+                        <!-- VLAN ID -->
+                        <Label text="VLAN ID:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="vlanIdField" promptText="Optionnel" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="100"/>
+                        
+                        <!-- Passerelle -->
+                        <Label text="Passerelle:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="gatewayField" promptText="192.168.1.1" 
+                                   GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        
+                        <!-- Serveurs DNS -->
+                        <Label text="Serveurs DNS:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="dnsServersField" promptText="8.8.8.8, 8.8.4.4" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3"/>
+                        
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="120"/>
+                            <ColumnConstraints minWidth="200" hgrow="ALWAYS"/>
+                            <ColumnConstraints minWidth="120"/>
+                            <ColumnConstraints minWidth="200" hgrow="ALWAYS"/>
+                        </columnConstraints>
+                    </GridPane>
+                    
+                    <!-- Informations calculées -->
+                    <VBox spacing="5" styleClass="info-panel">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Informations Calculées" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="12"/>
+                            </font>
+                        </Label>
+                        <GridPane hgap="10" vgap="5">
+                            <Label text="Première IP:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Label fx:id="firstIpLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Dernière IP:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                            <Label fx:id="lastIpLabel" text="-" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                            
+                            <Label text="Broadcast:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <Label fx:id="broadcastLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            
+                            <Label text="Total IPs:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                            <Label fx:id="totalIpsLabel" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Boutons -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Créer" onAction="#handleCreate" styleClass="primary-button" prefWidth="100"/>
+                        <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button" prefWidth="100"/>
+                        <Button text="Supprimer" onAction="#handleDelete" styleClass="danger-button" prefWidth="100"/>
+                        <Button text="Effacer" onAction="#handleClear" styleClass="default-button" prefWidth="100"/>
+                    </HBox>
+                </VBox>
+            </ScrollPane>
+        </SplitPane>
+    </center>
+</BorderPane>

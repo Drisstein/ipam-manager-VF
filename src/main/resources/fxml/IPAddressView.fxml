@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ipam.controller.IPAddressController">
+    
+    <top>
+        <VBox spacing="10">
+            <HBox styleClass="header" spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Gestion des Adresses IP" styleClass="header-title"/>
+            </HBox>
+            
+            <!-- Barre de recherche et filtres -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="5" right="15" bottom="5" left="15"/>
+                </padding>
+                <Label text="Sous-réseau:"/>
+                <ComboBox fx:id="subnetComboBox" onAction="#handleFilterBySubnet" prefWidth="200"/>
+                <TextField fx:id="searchField" promptText="Rechercher..." HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch" styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <center>
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+            <!-- Table des IPs -->
+            <VBox spacing="5">
+                <padding>
+                    <Insets top="10" right="15" bottom="5" left="15"/>
+                </padding>
+                <Label text="Liste des Adresses IP" styleClass="section-title">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Label>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button fx:id="exportPdfButton" text="Exporter PDF" onAction="#handleExportPdf" styleClass="secondary-button"/>
+                    <Button fx:id="exportExcelButton" text="Exporter Excel" onAction="#handleExportExcel" styleClass="secondary-button"/>
+                </HBox>
+                <TableView fx:id="ipTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="ipColumn" text="Adresse IP" prefWidth="120"/>
+                        <TableColumn fx:id="subnetColumn" text="Sous-réseau" prefWidth="130"/>
+                        <TableColumn fx:id="statusColumn" text="Statut" prefWidth="100"/>
+                        <TableColumn fx:id="assignedToColumn" text="Assigné à" prefWidth="150"/>
+                        <TableColumn fx:id="macColumn" text="MAC" prefWidth="130"/>
+                        <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="200"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Formulaire -->
+            <ScrollPane fitToWidth="true">
+                <VBox spacing="15" styleClass="form-panel">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    
+                    <Label text="Actions sur l'Adresse IP" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="14"/>
+                        </font>
+                    </Label>
+                    
+                    <GridPane hgap="10" vgap="10">
+                        <!-- Assigné à -->
+                        <Label text="Assigné à:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="assignedToField" promptText="Ex: PC-001, Serveur Web" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+                        
+                        <!-- Adresse MAC -->
+                        <Label text="Adresse MAC:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="macAddressField" promptText="00:11:22:33:44:55" 
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+                        
+                        <!-- Description -->
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextArea fx:id="descriptionArea" promptText="Informations complémentaires..." 
+                                  prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+                        
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="120"/>
+                            <ColumnConstraints minWidth="200" hgrow="ALWAYS"/>
+                            <ColumnConstraints minWidth="100"/>
+                        </columnConstraints>
+                    </GridPane>
+                    
+                    <!-- Boutons -->
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button fx:id="assignButton" text="Assigner" onAction="#handleAssign" styleClass="primary-button" prefWidth="120"/>
+                        <Button fx:id="releaseButton" text="Libérer" onAction="#handleRelease" styleClass="secondary-button" prefWidth="120"/>
+                        <Button fx:id="reserveButton" text="Réserver" onAction="#handleReserve" styleClass="warning-button" prefWidth="120"/>
+                    </HBox>
+                    
+                    <!-- Légende -->
+                    <VBox spacing="5" styleClass="info-panel">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Légende des Statuts" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="12"/>
+                            </font>
+                        </Label>
+                        <HBox spacing="20">
+                            <Label text="● Disponible" style="-fx-text-fill: #27ae60;"/>
+                            <Label text="● Assignée" style="-fx-text-fill: #3498db;"/>
+                            <Label text="● Réservée" style="-fx-text-fill: #f39c12;"/>
+                            <Label text="● Bloquée" style="-fx-text-fill: #e74c3c;"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </SplitPane>
+    </center>
+</BorderPane>

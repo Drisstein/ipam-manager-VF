@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ipam.controller.MainController"
+            fx:id="mainBorderPane">
+    
+    <!-- Menu Bar -->
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="Fichier">
+                    <MenuItem text="Actualiser" onAction="#handleDashboard"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Quitter" onAction="#handleExit"/>
+                </Menu>
+                
+                <Menu text="Gestion">
+                    <MenuItem text="Sous-réseaux" onAction="#handleSubnets"/>
+                    <MenuItem text="Adresses IP" onAction="#handleIPAddresses"/>
+                </Menu>
+                
+                <Menu text="Outils">
+                    <MenuItem text="Historique d'Audit" onAction="#handleAuditLog"/>
+                </Menu>
+
+                <Menu text="Session">
+                    <MenuItem text="Déconnexion" onAction="#handleLogout"/>
+                </Menu>
+                
+                <Menu text="Aide">
+                    <MenuItem text="À propos" onAction="#handleAbout"/>
+                </Menu>
+            </MenuBar>
+            
+            <!-- Toolbar -->
+            <ToolBar>
+                <Button fx:id="dashboardButton" text="Tableau de Bord" onAction="#handleDashboard" styleClass="toolbar-button"/>
+                <Separator orientation="VERTICAL"/>
+                <Button fx:id="subnetsButton" text="Sous-réseaux" onAction="#handleSubnets" styleClass="toolbar-button"/>
+                <Button fx:id="ipAddressesButton" text="Adresses IP" onAction="#handleIPAddresses" styleClass="toolbar-button"/>
+                <Separator orientation="VERTICAL"/>
+                <Button fx:id="auditLogButton" text="Historique" onAction="#handleAuditLog" styleClass="toolbar-button"/>
+            </ToolBar>
+        </VBox>
+    </top>
+    
+    <!-- Center content (will be dynamically loaded) -->
+    <center>
+        <!-- Content will be loaded here -->
+    </center>
+    
+    <!-- Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar" spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <Label text="Prêt" fx:id="statusLabel"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userLabel" text="Connecté : invité"/>
+        </HBox>
+    </bottom>
+</BorderPane>
