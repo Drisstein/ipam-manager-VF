@@ -26,7 +26,7 @@ public class AuditLogDAO {
         """;
 
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, auditLog.getAction());
             pstmt.setString(2, auditLog.getEntityType());
@@ -38,7 +38,8 @@ public class AuditLogDAO {
             int affected = pstmt.executeUpdate();
             
             if (affected > 0) {
-                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                try (Statement stmt = conn.createStatement();
+                     ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
                     if (rs.next()) {
                         auditLog.setId(rs.getLong(1));
                     }

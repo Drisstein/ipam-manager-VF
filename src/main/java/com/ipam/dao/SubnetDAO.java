@@ -26,8 +26,8 @@ public class SubnetDAO {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
-           try (Connection conn = DatabaseManager.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, subnet.getNetworkAddress());
             pstmt.setString(2, subnet.getSubnetMask());

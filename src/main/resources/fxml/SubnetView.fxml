@@ -53,7 +53,9 @@
                         <TableColumn fx:id="gatewayColumn" text="Passerelle" prefWidth="120"/>
                         <TableColumn fx:id="totalHostsColumn" text="Total IPs" prefWidth="80"/>
                         <TableColumn fx:id="usedHostsColumn" text="Utilisées" prefWidth="80"/>
+                        <TableColumn fx:id="availableColumn" text="Disponibles" prefWidth="90"/>
                         <TableColumn fx:id="usageColumn" text="Utilisation" prefWidth="100"/>
+                        <TableColumn fx:id="usageBarColumn" text="Barre" prefWidth="180"/>
                     </columns>
                 </TableView>
             </VBox>

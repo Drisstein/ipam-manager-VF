@@ -12,7 +12,8 @@ import java.sql.*;
 public class DatabaseManager {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class);
     private static final String DB_NAME = "ipam.db";
-    private static final String DB_PATH = System.getProperty("user.home") + File.separator + ".ipam" + File.separator + DB_NAME;
+    // Chemin de base de données modifié selon la demande
+    private static final String DB_PATH = "C:\\Users\\Drisstein\\Downloads\\ipam-manager-2026\\.ipam\\" + DB_NAME;
     private static volatile boolean initialized = false;
 
     /**

@@ -27,8 +27,8 @@ public class IPAddressDAO {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
-           try (Connection conn = DatabaseManager.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, ipAddress.getIpAddress());
             pstmt.setLong(2, ipAddress.getSubnetId());

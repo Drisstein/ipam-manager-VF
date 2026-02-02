@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -28,51 +29,46 @@
                     <Insets top="20" right="20" bottom="20" left="20"/>
                 </padding>
                 
-                <!-- Statistiques principales -->
+                <!-- Statistiques principales (cards) -->
                 <GridPane hgap="20" vgap="20">
-                    <!-- Nombre de sous-réseaux -->
-                    <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets top="15" right="15" bottom="15" left="15"/>
-                        </padding>
-                        <Label text="Sous-réseaux" styleClass="stat-label"/>
-                        <Label fx:id="totalSubnetsLabel" text="0" styleClass="stat-value"/>
-                    </VBox>
-                    
-                    <!-- Total IPs -->
-                    <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets top="15" right="15" bottom="15" left="15"/>
-                        </padding>
-                        <Label text="Total IPs" styleClass="stat-label"/>
-                        <Label fx:id="totalIPsLabel" text="0" styleClass="stat-value"/>
-                    </VBox>
-                    
-                    <!-- IPs utilisées -->
-                    <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets top="15" right="15" bottom="15" left="15"/>
-                        </padding>
-                        <Label text="IPs Utilisées" styleClass="stat-label"/>
-                        <Label fx:id="usedIPsLabel" text="0" styleClass="stat-value"/>
-                    </VBox>
-                    
-                    <!-- IPs disponibles -->
-                    <VBox styleClass="stat-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                        <padding>
-                            <Insets top="15" right="15" bottom="15" left="15"/>
-                        </padding>
-                        <Label text="IPs Disponibles" styleClass="stat-label"/>
-                        <Label fx:id="availableIPsLabel" text="0" styleClass="stat-value"/>
-                    </VBox>
-                    
-                    <!-- Colonne constraints pour la grille -->
                     <columnConstraints>
                         <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
                         <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
                         <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
                         <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
                     </columnConstraints>
+
+                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <StackPane styleClass="metric-icon"><FontIcon iconLiteral="fas-sitemap"/></StackPane>
+                        <VBox>
+                            <Label text="Total Réseaux" styleClass="stat-label"/>
+                            <Label fx:id="totalSubnetsLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <StackPane styleClass="metric-icon"><FontIcon iconLiteral="fas-list-ol"/></StackPane>
+                        <VBox>
+                            <Label text="Total Adresses IP" styleClass="stat-label"/>
+                            <Label fx:id="totalIPsLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <StackPane styleClass="metric-icon warning"><FontIcon iconLiteral="fas-chart-line"/></StackPane>
+                        <VBox>
+                            <Label text="IPs Utilisées" styleClass="stat-label"/>
+                            <Label fx:id="usedIPsLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                        <StackPane styleClass="metric-icon success"><FontIcon iconLiteral="fas-check-circle"/></StackPane>
+                        <VBox>
+                            <Label text="IPs Disponibles" styleClass="stat-label"/>
+                            <Label fx:id="availableIPsLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
                 </GridPane>
                 
                 <!-- Taux d'utilisation -->
@@ -91,6 +87,13 @@
                         </font>
                     </Label>
                 </VBox>
+
+                <!-- Aperçu réseaux -->
+                <VBox spacing="10">
+                    <Label text="Aperçu des Réseaux" styleClass="section-title"/>
+                    <FlowPane fx:id="networkOverviewContainer" hgap="16" vgap="16" prefWrapLength="1000"/>
+                </VBox>
+
                 
                 <!-- Graphique répartition des IPs -->
                 <VBox styleClass="card" spacing="10">
@@ -104,6 +107,7 @@
                     </Label>
                     <PieChart fx:id="ipStatusChart" legendSide="RIGHT" minHeight="300"/>
                 </VBox>
+
             </VBox>
         </ScrollPane>
     </center>

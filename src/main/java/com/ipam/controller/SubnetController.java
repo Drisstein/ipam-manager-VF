@@ -51,6 +51,12 @@ public class SubnetController implements Initializable {
     private TableColumn<Subnet, String> usageColumn;
 
     @FXML
+    private TableColumn<Subnet, Integer> availableColumn;
+
+    @FXML
+    private TableColumn<Subnet, Double> usageBarColumn;
+
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -137,6 +143,48 @@ public class SubnetController implements Initializable {
                             setStyle("-fx-text-fill: #27ae60;");
                         }
                     }
+                }
+            }
+        });
+
+        // Available hosts column
+        availableColumn.setCellValueFactory(cellData -> {
+            Subnet s = cellData.getValue();
+            int available = Math.max(0, s.getTotalHosts() - s.getUsedHosts());
+            return new javafx.beans.property.SimpleIntegerProperty(available).asObject();
+        });
+
+        // Usage progress bar column
+        usageBarColumn.setCellValueFactory(cellData ->
+            new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().getUsagePercentage() / 100.0).asObject()
+        );
+        usageBarColumn.setCellFactory(col -> new TableCell<Subnet, Double>() {
+            private final javafx.scene.control.ProgressBar bar = new javafx.scene.control.ProgressBar(0);
+            private final javafx.scene.control.Label label = new javafx.scene.control.Label();
+            private final javafx.scene.layout.HBox box = new javafx.scene.layout.HBox(8, bar, label);
+            {
+                box.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                bar.setPrefWidth(140);
+            }
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    bar.setProgress(value);
+                    double pct = value * 100.0;
+                    label.setText(String.format("%.0f%%", pct));
+                    // Color thresholds
+                    if (pct >= 90) {
+                        bar.setStyle("-fx-accent: #e74c3c;");
+                    } else if (pct >= 75) {
+                        bar.setStyle("-fx-accent: #f39c12;");
+                    } else {
+                        bar.setStyle("-fx-accent: #27ae60;");
+                    }
+                    setGraphic(box);
                 }
             }
         });

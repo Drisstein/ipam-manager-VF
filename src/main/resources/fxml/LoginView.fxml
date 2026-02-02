@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
+<StackPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ipam.controller.LoginController"
             styleClass="login-root">
-    <center>
-        <VBox spacing="16" alignment="CENTER" styleClass="login-card" maxWidth="420">
+    <children>
+        <VBox spacing="16" alignment="CENTER" styleClass="login-card" maxWidth="420" maxHeight="500">
             <padding>
                 <Insets top="30" right="30" bottom="30" left="30"/>
             </padding>
@@ -59,5 +59,5 @@
                 <Label text="Votre connexion est sécurisée avec chiffrement 256-bit SSL" />
             </HBox>
         </VBox>
-    </center>
-</BorderPane>
+    </children>
+</StackPane>
