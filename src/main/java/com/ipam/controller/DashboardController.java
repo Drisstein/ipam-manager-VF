@@ -7,10 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.TilePane;
 import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class DashboardController implements Initializable {
     private PieChart ipStatusChart;
 
     @FXML
-    private FlowPane networkOverviewContainer;
+    private TilePane networkOverviewContainer;
 
     private final SubnetService subnetService;
     private final IPAddressService ipAddressService;
@@ -171,13 +171,8 @@ public class DashboardController implements Initializable {
         VBox progressBox = new VBox(5, utilHeader, bar);
         progressBox.setPadding(new javafx.geometry.Insets(0, 0, 15, 0));
 
-        // 5. Button
-        javafx.scene.control.Button detailsBtn = new javafx.scene.control.Button("View Details");
-        detailsBtn.setMaxWidth(Double.MAX_VALUE);
-        detailsBtn.getStyleClass().add("view-details-btn");
-
         // Main Container
-        VBox card = new VBox(header, cidrLabel, metrics, progressBox, detailsBtn);
+        VBox card = new VBox(header, cidrLabel, metrics, progressBox);
         card.getStyleClass().add("network-card");
         card.setPrefWidth(300);
         card.setMinWidth(300);
@@ -194,9 +189,8 @@ public class DashboardController implements Initializable {
         double percentage = stats.getUsagePercentage();
         usagePercentageLabel.setText(String.format("%.1f%%", percentage));
         
-        // Couleur selon le taux d'utilisation
-        String color = getColorForPercentage(percentage);
-        usagePercentageLabel.setStyle("-fx-text-fill: " + color + "; -fx-font-weight: bold; -fx-font-size: 24px;");
+        // Couleur fixe blanche pour la lisibilité sur fond coloré (Style harmonisé avec l'image)
+        usagePercentageLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 80px;");
     }
 
     private void updateIPStatistics(IPAddressService.IPStatistics stats) {

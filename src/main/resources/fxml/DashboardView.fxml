@@ -32,66 +32,73 @@
                 <!-- Statistiques principales (cards) -->
                 <GridPane hgap="20" vgap="20">
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
-                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
-                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
-                        <ColumnConstraints percentWidth="25" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="20" hgrow="ALWAYS"/>
                     </columnConstraints>
 
-                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <StackPane styleClass="metric-icon"><FontIcon iconLiteral="fas-sitemap"/></StackPane>
-                        <VBox>
-                            <Label text="Total Réseaux" styleClass="stat-label"/>
-                            <Label fx:id="totalSubnetsLabel" text="0" styleClass="stat-value"/>
+                    <!-- Total Réseaux -->
+                    <HBox styleClass="metric-card" spacing="20" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-background-color: #9b59b6; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8); -fx-padding: 20;">
+                        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.25); -fx-background-radius: 50; -fx-min-width: 70; -fx-min-height: 70;">
+                            <FontIcon iconLiteral="fas-sitemap" iconSize="40" iconColor="white"/>
+                        </StackPane>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="Total Réseaux" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label fx:id="totalSubnetsLabel" text="0" style="-fx-font-size: 80px; -fx-font-weight: bold; -fx-text-fill: white;"/>
                         </VBox>
                     </HBox>
 
-                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                        <StackPane styleClass="metric-icon"><FontIcon iconLiteral="fas-list-ol"/></StackPane>
-                        <VBox>
-                            <Label text="Total Adresses IP" styleClass="stat-label"/>
-                            <Label fx:id="totalIPsLabel" text="0" styleClass="stat-value"/>
+                    <!-- Total IPs -->
+                    <HBox styleClass="metric-card" spacing="20" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-color: #1abc9c; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8); -fx-padding: 20;">
+                        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.25); -fx-background-radius: 50; -fx-min-width: 70; -fx-min-height: 70;">
+                            <FontIcon iconLiteral="fas-list-ol" iconSize="40" iconColor="white"/>
+                        </StackPane>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="Total Adresses IP" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label fx:id="totalIPsLabel" text="0" style="-fx-font-size: 80px; -fx-font-weight: bold; -fx-text-fill: white;"/>
                         </VBox>
                     </HBox>
 
-                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                        <StackPane styleClass="metric-icon warning"><FontIcon iconLiteral="fas-chart-line"/></StackPane>
-                        <VBox>
-                            <Label text="IPs Utilisées" styleClass="stat-label"/>
-                            <Label fx:id="usedIPsLabel" text="0" styleClass="stat-value"/>
+                    <!-- IPs Utilisées -->
+                    <HBox styleClass="metric-card" spacing="20" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-background-color: #e67e22; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8); -fx-padding: 20;">
+                        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.25); -fx-background-radius: 50; -fx-min-width: 70; -fx-min-height: 70;">
+                            <FontIcon iconLiteral="fas-chart-line" iconSize="40" iconColor="white"/>
+                        </StackPane>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="IPs Utilisées" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label fx:id="usedIPsLabel" text="0" style="-fx-font-size: 80px; -fx-font-weight: bold; -fx-text-fill: white;"/>
                         </VBox>
                     </HBox>
 
-                    <HBox styleClass="metric-card" spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                        <StackPane styleClass="metric-icon success"><FontIcon iconLiteral="fas-check-circle"/></StackPane>
-                        <VBox>
-                            <Label text="IPs Disponibles" styleClass="stat-label"/>
-                            <Label fx:id="availableIPsLabel" text="0" styleClass="stat-value"/>
+                    <!-- IPs Disponibles -->
+                    <HBox styleClass="metric-card" spacing="20" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="0" style="-fx-background-color: #2ecc71; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8); -fx-padding: 20;">
+                        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.25); -fx-background-radius: 50; -fx-min-width: 70; -fx-min-height: 70;">
+                            <FontIcon iconLiteral="fas-check-circle" iconSize="40" iconColor="white"/>
+                        </StackPane>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="IPs Disponibles" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label fx:id="availableIPsLabel" text="0" style="-fx-font-size: 80px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Taux Utilisation  -->
+                    <HBox styleClass="metric-card" spacing="20" alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="0" style="-fx-background-color: #e74c3c; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8); -fx-padding: 20;">
+                        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.25); -fx-background-radius: 50; -fx-min-width: 70; -fx-min-height: 70;">
+                            <FontIcon iconLiteral="fas-chart-pie" iconSize="40" iconColor="white"/>
+                        </StackPane>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label text="Taux Utilisation" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                            <Label fx:id="usagePercentageLabel" text="0%" style="-fx-font-size: 150px; -fx-font-weight: bold; -fx-text-fill: white;"/>
                         </VBox>
                     </HBox>
                 </GridPane>
-                
-                <!-- Taux d'utilisation -->
-                <VBox styleClass="card" spacing="10">
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                    <Label text="Taux d'Utilisation Global" styleClass="section-title">
-                        <font>
-                            <Font name="System Bold" size="16"/>
-                        </font>
-                    </Label>
-                    <Label fx:id="usagePercentageLabel" text="0%" styleClass="usage-percentage">
-                        <font>
-                            <Font name="System Bold" size="32"/>
-                        </font>
-                    </Label>
-                </VBox>
 
                 <!-- Aperçu réseaux -->
                 <VBox spacing="10">
                     <Label text="Aperçu des Réseaux" styleClass="section-title"/>
-                    <FlowPane fx:id="networkOverviewContainer" hgap="16" vgap="16" prefWrapLength="1000"/>
+                    <TilePane fx:id="networkOverviewContainer" hgap="16" vgap="16" prefColumns="4" alignment="TOP_CENTER"/>
                 </VBox>
 
                 
